@@ -1,0 +1,35 @@
+{
+  "name": "api",
+  "version": "0.1.1",
+  "description": "API which services wikispeed.io's capabilities.",
+  "main": "index.ts",
+  "scripts": {
+    "start": "nodemon src/index.ts"
+  },
+  "author": "William Bell",
+  "license": "ISC",
+  "engines": {
+    "node": "19.2.0"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "printWidth": 100
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.13.0",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
+    "eslint": "^8.34.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  }
+}
