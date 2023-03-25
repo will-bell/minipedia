@@ -1,5 +1,5 @@
-const getPageJson = require("../routes/src/wikipedia/getPageHtml");
-const getWikiTitles = require("../routes/src/wikipedia/getWikiTitles");
+const getPageJson = require("../wikipedia/getPageHtml");
+const getWikiTitles = require("../wikipedia/getWikiTitles");
 const fs = require("fs");
 
 getPageJson("Ada_Lovelace").then((html) => fs.writeFileSync("./result.html", html));

@@ -83,7 +83,7 @@ const audioNotYetSupported = ($: CheerioAPI) => {
   $("audio").replaceWith('<span style="color:red">audio tags not supported yet</span>');
 };
 
-export const simplifyWikipage = ($: CheerioAPI) => {
+export const simplifyWikiHtml = ($: CheerioAPI) => {
   removeUnusedElements($);
   removeWikimediaAttrs($);
   removeWikimediaClasses($);

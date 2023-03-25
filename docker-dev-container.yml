@@ -4,9 +4,11 @@ version: "3.7"
 
 services:
   api:
+    container_name: minipedia-api
     build: ./node
     environment:
       - PORT=3001
+      - DB_CONN_STR=mongodb://root:example@minipedia-library:27017/
     ports:
       - 3001:3001
     networks:
@@ -20,20 +22,21 @@ services:
       - mongodb
 
   mongodb:
+    container_name: minipedia-library
     image: mongo:latest
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=rootpassword
+      - MONGO_INITDB_ROOT_PASSWORD=example
     ports:
       - 27017:27017
     networks:
       - api-db
     volumes:
       - mongodb_data_container:/data/db
-    
 
 volumes:
   mongodb_data_container:
+
 
 networks:
   api-db:

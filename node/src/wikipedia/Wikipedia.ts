@@ -1,5 +1,5 @@
 import { load } from "cheerio";
-import { simplifyWikipage } from "./simplifyWikipage";
+import { simplifyWikiHtml } from "./simplifyWikiHtml";
 
 export default class Wikipedia {
   static baseurl = "https://en.wikipedia.org/w/api.php?";
@@ -18,7 +18,7 @@ export default class Wikipedia {
       .then((response) => response.json())
       .then((wikiHtml) => {
         const $ = load(wikiHtml);
-        return simplifyWikipage($).html();
+        return simplifyWikiHtml($).html();
       });
   }
 

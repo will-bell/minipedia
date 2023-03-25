@@ -1,3 +1,9 @@
+# TypeScript build dir
+built
+
+# VS Code
+.vscode
+
 # Logs
 logs
 *.log

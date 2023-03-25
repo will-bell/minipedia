@@ -1,14 +1,26 @@
-import * as express from "express";
-import * as cors from "cors";
-import api from "./routes/api";
+import Wikipedia from "./wikipedia/Wikipedia";
+import MongoLibrarian from "./librarian/MongoLibrarian";
+import MinipediaRouter from "./MinipediaRouter";
+import MinipediaApp from "./MinipediaApp";
+import LibrarianController from "./librarian/LibrarianController";
+import MongoDbHandler from "./MongoDbHandler";
 
-const app = express();
-app.use(cors());
+async function initialize(): Promise<MinipediaApp> {
+  // MongoDB Library
+  const mongoDbHandler = new MongoDbHandler(process.env.DB_CONN_STR);
+  const articlesDb = await mongoDbHandler.connect();
 
-const port = process.env.PORT;
+  const wikipedia = new Wikipedia();
+  const librarian = new MongoLibrarian(articlesDb, wikipedia);
 
-app.use("/api", api);
+  const app = new MinipediaApp(MinipediaRouter(new LibrarianController(librarian)));
 
-app.listen(port, function () {
-  console.log(`wikispeed.io listening on port ${port}!`);
-});
+  // Cleanup
+  app.on("stop", async () => await mongoDbHandler.close.bind(mongoDbHandler)());
+
+  return app;
+}
+
+if (require.main === module) {
+  initialize().then((app) => app.run());
+}
