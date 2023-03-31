@@ -16,7 +16,8 @@ export default class Wikipedia {
 
     return fetch(url)
       .then((response) => response.json())
-      .then((wikiHtml) => {
+      .then((jsonData) => {
+        const wikiHtml = jsonData.parse.text["*"];
         const $ = load(wikiHtml);
         return simplifyWikiHtml($).html();
       });

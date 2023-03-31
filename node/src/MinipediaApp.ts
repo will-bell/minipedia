@@ -17,6 +17,7 @@ export default class MinipediaApp extends EventEmitter {
   private buildExpressApp(): express.Application {
     const app = express();
     app.use(cors());
+    app.use(express.json());
     app.use("/", this.router);
 
     return app;

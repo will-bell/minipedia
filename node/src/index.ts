@@ -8,15 +8,15 @@ import MongoDbHandler from "./MongoDbHandler";
 async function initialize(): Promise<MinipediaApp> {
   // MongoDB Library
   const mongoDbHandler = new MongoDbHandler(process.env.DB_CONN_STR);
-  const articlesDb = await mongoDbHandler.connect();
+  const database = await mongoDbHandler.connect();
 
   const wikipedia = new Wikipedia();
-  const librarian = new MongoLibrarian(articlesDb, wikipedia);
+  const librarian = new MongoLibrarian(database, wikipedia);
 
   const app = new MinipediaApp(MinipediaRouter(new LibrarianController(librarian)));
 
   // Cleanup
-  app.on("stop", async () => await mongoDbHandler.close.bind(mongoDbHandler)());
+  app.on("stop", async () => await mongoDbHandler.close());
 
   return app;
 }
